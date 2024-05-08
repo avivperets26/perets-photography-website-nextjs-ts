@@ -1,0 +1,64 @@
+.heroHeader {
+  background: 
+  linear-gradient(
+    rgba(0, 0, 0, 0.3), 
+    rgba(0, 0, 0, 0.3)
+  ),
+  url('../../assets/DSC00807.jpg') no-repeat center center fixed; 
+    opacity: 1;
+    -webkit-background-size: cover;
+    -moz-background-size: cover;
+    -o-background-size: cover;
+    background-size: cover;
+    height: 100vh; /* Full height */
+    width: 100vw; /* Full width */
+    object-fit: cover;
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    align-items: center;
+    z-index:0;
+  }
+
+  .overlay {
+    text-align: center;
+    color: #F2F2E9;
+    
+    padding: 30px;
+    border-radius: 8px;
+    max-width: 80%;
+  }
+
+  .title {
+    font-size: 56px;
+    font-weight: bold;
+    line-height: 1.2;
+    text-shadow: 2px 2px 4px rgba(0, 0, 0, 0.6);
+  }
+  
+  .subtitle {
+    font-size: 28px;
+    margin-top: 10px;
+    text-shadow: 1px 1px 3px rgba(0, 0, 0, 0.6);
+  }
+  
+  .cta {
+    margin-top: 30px;
+    padding: 12px 24px;
+    background-color: #1D4036;
+    color: #F2F2E9;
+    
+    text-decoration: none;
+    border-radius: 5px;
+    transition: background-color 0.3s;
+    width: 15rem;
+    justify-content: center;
+    align-items: center;
+    display: flex;
+    margin-inline: auto;
+  }
+  
+  .cta:hover {
+    background-color: #407352;
+    color: #F2F2E9
+  }

@@ -1,0 +1,55 @@
+.carouselContainer {
+    position: relative;
+    width: 100%;
+    overflow: hidden;
+  }
+
+  .carouselContainer::before,
+  .carouselContainer::after {
+    content: "";
+    position: absolute;
+    top: 0;
+    bottom: 0;
+    width: 200px; /* Adjust this value to control the width of the fade effect */
+    pointer-events: none;
+    background: linear-gradient(to right, rgb(0, 0, 0) 0%, transparent 100%);
+    z-index: 2;
+  }
+
+  .carouselContainer::after {
+  right: 0;
+  transform: rotateZ(180deg);
+  }
+  .carouselContainer::before {
+  left: 0;
+  }
+  
+  .imagesCarousel {
+    display: flex;
+    width: calc(200px * 140); /* Adjust this value to 2 * number of images */
+    animation: scroll 40s linear infinite;
+    position: relative;
+    z-index: 1;
+  }
+  
+  .ImagesCarousel li {
+    list-style: none;
+    width: 200px;
+    height: 200px;
+    background-color: #2b2b2b;
+    border-radius: 8px;
+    margin: 10px;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+  }
+  
+  @keyframes scroll {
+    0% {
+      transform: translateX(0);
+    }
+    100% {
+      transform: translateX(calc(-200px * 7));
+    }
+  }
+  

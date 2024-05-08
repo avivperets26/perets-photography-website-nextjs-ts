@@ -1,0 +1,23 @@
+.navbar {
+    display: flex;
+    position: fixed;
+    top: 0;
+    z-index: 100;
+    width: 100%;
+    justify-content: space-around;
+    align-items: center;
+    padding: 1rem 2rem;
+    background-color: rgba(0, 0, 0, 1);
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.5);
+    animation : slideDown 0.5s;
+}
+
+@keyframes slideDown {
+    from {
+        transform: translateY(-100%);
+    }
+    to {
+        transform: translateY(0);
+    }
+}
+
