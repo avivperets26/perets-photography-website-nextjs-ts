@@ -1,0 +1,76 @@
+.worldMap {
+    text-align: center;
+    padding: 60px 20px;
+    color: white;
+    background-color: #1e1e1e;
+    border-radius: 12px;
+    margin: 0 5%;
+    width:100vw
+  }
+  
+  .title {
+    font-size: 36px;
+    margin-bottom: 20px;
+  }
+  
+  .mapContainer {
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    overflow: hidden;
+  }
+  
+  .mapSvg {
+    width: 80%;
+    max-width: 1200px;
+  }
+  
+  .country {
+    fill: #383d46;
+    fill-opacity: 1;
+    stroke: #21252b;
+    stroke-opacity: 1;
+    stroke-width: 0.5;
+    transition: fill 0.3s, stroke 0.3s;
+  }
+  
+  .country:hover {
+    fill: #0070f3;
+  }
+
+  .brazil{
+    fill: green
+  }
+  
+  #UA {
+    fill: #0f0;
+  }
+  #UA:hover {
+    fill: #008000;
+  }
+  #ID {
+    fill: #f00;
+  }
+  #ID:hover {
+    fill: #800000;
+  }
+  #GL {
+    fill: #fff;
+  }
+  #GL:hover {
+    fill: #bbb;
+  }
+  #BR {
+    fill: #00f;
+  }
+  #BR:hover {
+    fill: #000080;
+  }
+  
+  @media screen and (max-width: 767px) {
+    .mapSvg {
+      width: 100%;
+      max-width: 100%;
+    }
+  }
+  
