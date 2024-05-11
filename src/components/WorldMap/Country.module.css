@@ -1,0 +1,26 @@
+
+.countryGroup {
+    position: relative;
+  }
+  
+
+.country {
+    fill: #383d46;
+    fill-opacity: 1;
+    stroke: #21252b;
+    stroke-opacity: 1;
+    stroke-width: 0.5;
+    transition: fill 0.3s, stroke 0.3s;
+    z-index: 1;
+  }
+  
+  .country:hover {
+    fill: #0070f3;
+  }
+  .previewPosition {
+    top: -80px; /* Adjust this based on the position required */
+  }
+
+  .visitedCountry{
+    fill:green;
+  }

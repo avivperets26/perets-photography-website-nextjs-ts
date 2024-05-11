@@ -14,10 +14,10 @@ export default function Home() {
         <div className={styles.content}>
           <Feature />
           <WorldMap />
-          <Stats />
-          <EcommerceProducts />
-          <Benefits />
-          <LogoList />
+          {/* <Stats /> */}
+          {/* <EcommerceProducts /> */}
+          {/* <Benefits /> */}
+          {/* <LogoList /> */}
           {/* <CTA /> */}
           {/* <Contact /> */}
           {/* <Locations /> */}

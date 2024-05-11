@@ -11,10 +11,12 @@ const Navbar: React.FC = () => {
     const handleScroll = () => {
       const scrollPos =
         window.scrollY / (document.body.offsetHeight - window.innerHeight);
+      const opacity = 0.5 + (0.5 - scrollPos);
       if (navbarRef.current) {
-        navbarRef.current.style.backgroundColor = `rgba(0, 0, 0, ${
-          0.4 + (0.6 - scrollPos)
-        })`;
+        navbarRef.current.style.backgroundColor = `rgba(0, 0, 0, ${Math.max(
+          opacity,
+          0.5
+        )})`;
       }
     };
     window.addEventListener("scroll", handleScroll);

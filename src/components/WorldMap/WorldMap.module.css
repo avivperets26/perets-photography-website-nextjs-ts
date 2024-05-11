@@ -17,54 +17,13 @@
     display: flex;
     justify-content: center;
     align-items: center;
+    overflow: visible; /* Allow preview boxes to appear */
     overflow: hidden;
   }
   
   .mapSvg {
     width: 80%;
     max-width: 1200px;
-  }
-  
-  .country {
-    fill: #383d46;
-    fill-opacity: 1;
-    stroke: #21252b;
-    stroke-opacity: 1;
-    stroke-width: 0.5;
-    transition: fill 0.3s, stroke 0.3s;
-  }
-  
-  .country:hover {
-    fill: #0070f3;
-  }
-
-  .brazil{
-    fill: green
-  }
-  
-  #UA {
-    fill: #0f0;
-  }
-  #UA:hover {
-    fill: #008000;
-  }
-  #ID {
-    fill: #f00;
-  }
-  #ID:hover {
-    fill: #800000;
-  }
-  #GL {
-    fill: #fff;
-  }
-  #GL:hover {
-    fill: #bbb;
-  }
-  #BR {
-    fill: #00f;
-  }
-  #BR:hover {
-    fill: #000080;
   }
   
   @media screen and (max-width: 767px) {

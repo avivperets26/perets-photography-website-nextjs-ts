@@ -1,24 +1,24 @@
 import styles from "./EcommerceProducts.module.css";
-
+import Image from "next/image";
 const EcommerceProducts = () => {
   const products = [
     {
       id: "1",
       name: "Nature Photo Pack",
       price: "$29.99",
-      image: "/assets/nature-pack.jpg",
+      image: "/images/1928-Enhanced-SR.jpg",
     },
     {
       id: "2",
       name: "Sunset Preset Pack",
       price: "$19.99",
-      image: "/assets/sunset-pack.jpg",
+      image: "/images/1928-Enhanced-SR.jpg",
     },
     {
       id: "3",
       name: "Wildlife Photo Pack",
       price: "$39.99",
-      image: "/assets/wildlife-pack.jpg",
+      image: "/images/1928-Enhanced-SR.jpg",
     },
   ];
 
@@ -28,7 +28,9 @@ const EcommerceProducts = () => {
       <div className={styles.productList}>
         {products.map((product) => (
           <div key={product.id} className={styles.product}>
-            <img
+            <Image
+              width={300}
+              height={300}
               src={product.image}
               alt={product.name}
               className={styles.productImage}
