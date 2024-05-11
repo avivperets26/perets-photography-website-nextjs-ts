@@ -1,6 +1,6 @@
 .worldMap {
     text-align: center;
-    padding: 60px 20px;
+    padding: 30px 0;
     color: white;
     background-color: #1e1e1e;
     border-radius: 12px;
@@ -18,7 +18,7 @@
     justify-content: center;
     align-items: center;
     overflow: visible; /* Allow preview boxes to appear */
-    overflow: hidden;
+    position: relative;
   }
   
   .mapSvg {

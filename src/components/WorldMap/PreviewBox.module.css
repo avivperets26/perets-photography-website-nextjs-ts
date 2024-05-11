@@ -1,7 +1,7 @@
 .previewBoxContainer {
   position: absolute;
  
-  left: 50%;
+  /* left: 50%; */
   transform: translateX(-50%);
   opacity:1;
   visibility: visible;
@@ -10,14 +10,7 @@
 }
   
  
-.arrow {
-  width: 0;
-  height: 0;
-  border-left: 10px solid transparent;
-  border-right: 10px solid transparent;
-  border-top: 10px solid #ffffff;
-  margin: 0 auto;
-}
+
 
 .previewBox {
   background-color: #2e2e2e;

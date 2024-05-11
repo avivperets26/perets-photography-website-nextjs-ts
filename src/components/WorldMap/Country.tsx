@@ -1,30 +1,28 @@
 import styles from "./Country.module.css";
 
 interface CountryProps {
-  countryName: string;
-  path: string;
-  onMouseEnter: (data: any) => any;
-  onMouseLeave?: (data: any) => void;
-  visited: boolean;
+  country: {
+    visited: boolean;
+    name: string;
+    path: string;
+  };
+  onHover: (event: React.MouseEvent<SVGPathElement, MouseEvent>) => void;
+  onLeave: () => void;
 }
 
-const Country: React.FC<CountryProps> = ({
-  countryName,
-  path,
-  onMouseEnter,
-  onMouseLeave,
-  visited,
-}) => {
+const Country: React.FC<CountryProps> = ({ country, onHover, onLeave }) => {
   return (
     <g
       className={styles.countryGroup}
-      onMouseEnter={onMouseEnter}
-      onMouseLeave={onMouseLeave}
+      onMouseEnter={onHover}
+      onMouseLeave={onLeave}
     >
       <path
-        id={countryName.toLowerCase()}
-        className={`${styles.country} ${visited ? styles.visitedCountry : ""}`}
-        d={path}
+        id={country.name.toLowerCase()}
+        className={`${styles.country} ${
+          country.visited ? styles.visitedCountry : ""
+        }`}
+        d={country.path}
       />
     </g>
   );
