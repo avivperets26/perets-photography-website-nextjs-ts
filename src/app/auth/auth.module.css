@@ -1,0 +1,105 @@
+/* src/app/auth/auth.module.css */
+
+.container {
+    position: relative;
+    display: flex;
+    justify-content: center;
+    align-items: center;
+    min-height: 100vh;
+    overflow: hidden;
+    padding: 2rem;
+    background-color: var(--background-end-rgb);
+  }
+  
+  .authWrapper {
+    position: relative;
+    display: flex;
+    gap: 4rem;
+    background-color: rgba(0, 0, 0, 0.7);
+    border-radius: 12px;
+    padding: 2rem;
+    z-index: 1;
+  }
+  
+  .signInWrapper,
+  .signUpWrapper {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .title {
+    font-size: 1.5rem;
+    font-weight: bold;
+    color: white;
+  }
+  
+  .subtitle {
+    font-size: 1rem;
+    color: white;
+  }
+  
+  .errorMessage {
+    color: #e53e3e;
+    margin-bottom: 1rem;
+  }
+  
+  .form {
+    display: flex;
+    flex-direction: column;
+    gap: 1rem;
+  }
+  
+  .label {
+    font-size: 0.875rem;
+    font-weight: medium;
+    color: white;
+  }
+  
+  .input {
+    width: 100%;
+    padding: 0.5rem;
+    border: 1px solid #7B9EA6;
+    border-radius: 4px;
+    outline: none;
+    background-color: #7B9EA6;
+    color: white;
+    transition: border-color 0.2s;
+  }
+  
+  .input:focus {
+    border-color: #254B59;
+  }
+  
+  .button {
+    width: 100%;
+    padding: 0.75rem;
+    font-weight: bold;
+    color: white;
+    background-color: #254B59;
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    transition: background-color 0.2s;
+  }
+  
+  .button:hover {
+    background-color: white;
+    color: #254B59;
+  }
+  
+  .imageContainer {
+    position: absolute;
+    top: 0;
+    left: 0;
+    width: 100%;
+    height: 100%;
+    z-index: 0;
+    overflow: hidden;
+  }
+  
+  .backgroundImage {
+    object-fit: cover;
+    opacity: 0.5;
+  }
+  

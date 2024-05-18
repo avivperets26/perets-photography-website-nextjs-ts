@@ -1,11 +1,23 @@
 "use client";
-
 import React, { useEffect, useRef } from "react";
 import styles from "./Navbar.module.css";
 import Link from "next/link";
+import { signOut } from "next-auth/react";
+import { useRouter } from "next/navigation";
+import Image from "next/image";
 
-const Navbar: React.FC = () => {
+interface NavbarProps {
+  session: any;
+}
+
+const Navbar: React.FC<NavbarProps> = ({ session }) => {
   const navbarRef = useRef<HTMLDivElement>(null);
+  const router = useRouter();
+
+  const handleSignOut = async () => {
+    await signOut();
+    router.push("/auth");
+  };
 
   useEffect(() => {
     const handleScroll = () => {
@@ -24,13 +36,32 @@ const Navbar: React.FC = () => {
   }, []);
 
   return (
-    <div ref={navbarRef} className={styles.navbar}>
-      <Link href="/">Home</Link>
-      <Link href="/gallery">Gallery</Link>
-      <Link href="/products">Products</Link>
-      <Link href="/contact">Contact</Link>
-      <Link href="/about">About</Link>
-    </div>
+    <nav ref={navbarRef} className={styles.navbar}>
+      <div className={styles.navbarLinks}>
+        <Link href="/">Home</Link>
+        <Link href="/gallery">Gallery</Link>
+        <Link href="/products">Products</Link>
+        <Link href="/contact">Contact</Link>
+        <Link href="/about">About</Link>
+      </div>
+      <div className={styles.navbarActions}>
+        {session ? (
+          <button onClick={handleSignOut} className={styles.signoutButton}>
+            Sign Out
+          </button>
+        ) : (
+          <Link href="/auth" className={styles.signinButton}>
+            Sign In
+          </Link>
+        )}
+        <div className={styles.cartIcon}>
+          <Link href="/cart">
+            <Image src="/icons/cartSvg.svg" alt="Cart" width={30} height={30} />
+            <span className={styles.cartcount}>0</span>
+          </Link>
+        </div>
+      </div>
+    </nav>
   );
 };
 
