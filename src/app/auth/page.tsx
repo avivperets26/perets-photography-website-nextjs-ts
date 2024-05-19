@@ -27,6 +27,8 @@ const signupSchema = z
 
 type SignupSchema = z.infer<typeof signupSchema>;
 
+// Rest of your component
+
 export default function AuthPage() {
   const [error, setError] = useState("");
   const router = useRouter();
@@ -55,7 +57,11 @@ export default function AuthPage() {
       headers: {
         "Content-Type": "application/json",
       },
-      body: JSON.stringify({ email: data.email, password: data.password }),
+      body: JSON.stringify({
+        name: data.name,
+        email: data.email,
+        password: data.password,
+      }),
     });
 
     if (res.ok) {
@@ -226,8 +232,8 @@ export default function AuthPage() {
         <Image
           src="/images/zin.jpg"
           alt="Background"
-          layout="fill"
-          objectFit="cover"
+          fill
+          style={{ objectFit: "cover" }}
           className={styles.backgroundImage}
         />
       </div>

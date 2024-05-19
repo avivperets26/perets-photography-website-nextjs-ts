@@ -1,14 +1,13 @@
+// src/app/api/auth/[...nextauth]/route.ts
 import NextAuth, { AuthOptions, SessionStrategy } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
 import bcrypt from "bcrypt";
-import prisma from "@/lib/prisma"; // Adjust the import path as needed
+import { PrismaClient } from '@prisma/client';
 
+const prisma = new PrismaClient();
 
-// console.log('Prisma in NextAuth:', prisma);
-console.log('Google Client ID:', process.env.GOOGLE_CLIENT_ID);
-console.log('Google Client Secret:', process.env.GOOGLE_CLIENT_SECRET);
 export const authOptions: AuthOptions = {
     providers: [
         CredentialsProvider({
@@ -32,16 +31,9 @@ export const authOptions: AuthOptions = {
             }
         }),
         GoogleProvider({
-            clientId: process.env.GOOGLE_ID!,
-            clientSecret: process.env.GOOGLE_SECRET!,
-            authorization: {
-                params: {
-                    prompt: "consent",
-                    access_type: "offline",
-                    response_type: "code"
-                }
-            }
-        })
+            clientId: process.env.GOOGLE_CLIENT_ID!,
+            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+        }),
     ],
     adapter: PrismaAdapter(prisma),
     secret: process.env.NEXTAUTH_SECRET,
@@ -53,6 +45,23 @@ export const authOptions: AuthOptions = {
     },
     pages: {
         signIn: "/auth",
+    },
+    callbacks: {
+        async session({ session, token }) {
+            console.log("Session callback", { session, token });
+            if (token && session.user) {
+                session.userId = token.sub ?? '';
+                session.user.id = token.sub ?? '';
+            }
+            return session;
+        },
+        async jwt({ token, user }) {
+            console.log("JWT callback", { token, user });
+            if (user) {
+                token.sub = user.id as string;
+            }
+            return token;
+        },
     },
 };
 

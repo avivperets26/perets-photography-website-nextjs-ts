@@ -79,3 +79,9 @@ Check out our [Next.js deployment documentation](https://nextjs.org/docs/deploym
 |-- package.json        # Package metadata and dependencies
 |-- README.md           # Project overview and instructions
 
+
+
+#npx dotenv -e .env.local -- prisma migrate dev
+#npx dotenv -e .env.local -- prisma migrate dev --name init
+#npx dotenv -e .env.local -- prisma db seed --preview-feature
+#npx dotenv -e .env.local -- prisma generate

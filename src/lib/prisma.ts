@@ -1,15 +1,16 @@
 import { PrismaClient } from "@prisma/client";
 
-declare global {
-    var prisma: PrismaClient | undefined;
+const prisma = new PrismaClient();
+
+console.log('Prisma Client:', prisma);
+
+async function testPrismaConnection() {
+    try {
+        const result = await prisma.$queryRaw`SELECT 1`;
+        console.log('Database Connection Test Result:', result);
+    } catch (error) {
+        console.error('Prisma Connection Error:', error);
+    }
 }
 
-const prisma = global.prisma || new PrismaClient();
-
-if (process.env.NODE_ENV !== "production") {
-    global.prisma = prisma;
-}
-
-//console.log('Prisma Client Initialized:', prisma);
-
-export default prisma;
+testPrismaConnection();
