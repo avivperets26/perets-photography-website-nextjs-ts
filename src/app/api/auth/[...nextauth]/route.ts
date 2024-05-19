@@ -1,22 +1,23 @@
-import NextAuth from "next-auth";
+import NextAuth, { AuthOptions, SessionStrategy } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
-import { PrismaClient } from "@prisma/client";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
-
 import bcrypt from "bcrypt";
+import prisma from "@/lib/prisma"; // Adjust the import path as needed
 
-const prisma = new PrismaClient();
 
-export const authOptions = {
+// console.log('Prisma in NextAuth:', prisma);
+console.log('Google Client ID:', process.env.GOOGLE_CLIENT_ID);
+console.log('Google Client Secret:', process.env.GOOGLE_CLIENT_SECRET);
+export const authOptions: AuthOptions = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
             credentials: {
                 email: { label: "Email", type: "email" },
-                password: { label: "Password", type: "password" }
+                password: { label: "Password", type: "password" },
             },
-            authorize: async (credentials, req) => {
+            authorize: async (credentials) => {
                 if (!credentials) return null;
                 const user = await prisma.user.findUnique({
                     where: { email: credentials.email },
@@ -31,20 +32,27 @@ export const authOptions = {
             }
         }),
         GoogleProvider({
-            clientId: process.env.GOOGLE_CLIENT_ID!,
-            clientSecret: process.env.GOOGLE_CLIENT_SECRET!,
+            clientId: process.env.GOOGLE_ID!,
+            clientSecret: process.env.GOOGLE_SECRET!,
+            authorization: {
+                params: {
+                    prompt: "consent",
+                    access_type: "offline",
+                    response_type: "code"
+                }
+            }
         })
     ],
     adapter: PrismaAdapter(prisma),
     secret: process.env.NEXTAUTH_SECRET,
     session: {
-        strategy: "jwt",
+        strategy: "jwt" as SessionStrategy,
     },
     jwt: {
         secret: process.env.JWT_SECRET,
     },
     pages: {
-        signIn: "/auth/signin",
+        signIn: "/auth",
     },
 };
 
