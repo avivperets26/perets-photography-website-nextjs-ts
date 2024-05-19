@@ -21,8 +21,7 @@ export const authOptions: AuthOptions = {
                 const user = await prisma.user.findUnique({
                     where: { email: credentials.email },
                 });
-
-                if (user && await bcrypt.compare(credentials.password, user.password)) {
+                if (user && user.password && await bcrypt.compare(credentials.password, user.password)) {
                     const { password, ...userWithoutPassword } = user;
                     return { ...userWithoutPassword, id: String(user.id) };
                 } else {
@@ -47,7 +46,7 @@ export const authOptions: AuthOptions = {
         signIn: "/auth",
     },
     callbacks: {
-        async session({ session, token }) {
+        async session({ session, token }: { session: any, token: any }) {
             console.log("Session callback", { session, token });
             if (token && session.user) {
                 session.userId = token.sub ?? '';
@@ -55,7 +54,7 @@ export const authOptions: AuthOptions = {
             }
             return session;
         },
-        async jwt({ token, user }) {
+        async jwt({ token, user }: { token: any, user: any }) {
             console.log("JWT callback", { token, user });
             if (user) {
                 token.sub = user.id as string;
@@ -63,8 +62,9 @@ export const authOptions: AuthOptions = {
             return token;
         },
     },
+
 };
 
-const handler = (req: any, res: any) => NextAuth(req, res, authOptions);
+const handler = NextAuth(authOptions);
 
 export { handler as GET, handler as POST };
