@@ -3,11 +3,13 @@
   "version": "0.1.0",
   "private": true,
   "scripts": {
-    "prisma": "dotenv -e .env.local -- npx prisma",
+    "prisma": "prisma generate",
     "dev": "next dev",
-    "build": "next build",
+    "build": "prisma generate && next build",
     "start": "next start",
-    "lint": "next lint"
+    "lint": "next lint",
+    "postinstall": "prisma generate"
+    
   },
   "dependencies": {
     "@hookform/resolvers": "^3.4.0",
