@@ -1,5 +1,5 @@
 // src/app/api/auth/[...nextauth]/route.ts
-import NextAuth, { AuthOptions, SessionStrategy } from "next-auth";
+import NextAuth, { NextAuthOptions, SessionStrategy } from "next-auth";
 import { PrismaAdapter } from "@next-auth/prisma-adapter";
 import CredentialsProvider from "next-auth/providers/credentials";
 import GoogleProvider from "next-auth/providers/google";
@@ -8,7 +8,7 @@ import { PrismaClient } from '@prisma/client';
 
 const prisma = new PrismaClient();
 
-export const authOptions: AuthOptions = {
+export const authOptions: NextAuthOptions = {
     providers: [
         CredentialsProvider({
             name: "Credentials",
@@ -62,7 +62,6 @@ export const authOptions: AuthOptions = {
             return token;
         },
     },
-
 };
 
 const handler = NextAuth(authOptions);
