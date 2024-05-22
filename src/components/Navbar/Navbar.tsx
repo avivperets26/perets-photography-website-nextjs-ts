@@ -2,21 +2,16 @@
 import React, { useEffect, useRef } from "react";
 import styles from "./Navbar.module.css";
 import Link from "next/link";
-import { signOut } from "next-auth/react";
-import { useRouter } from "next/navigation";
 import Image from "next/image";
+import { useAuth } from "@/context/AuthContext";
+import { auth } from "@/lib/firebaseConfig";
 
-interface NavbarProps {
-  session: any;
-}
-
-const Navbar: React.FC<NavbarProps> = ({ session }) => {
+const Navbar: React.FC = () => {
+  const { user } = useAuth();
   const navbarRef = useRef<HTMLDivElement>(null);
-  const router = useRouter();
 
   const handleSignOut = async () => {
-    await signOut();
-    router.push("/auth");
+    await auth.signOut();
   };
 
   useEffect(() => {
@@ -45,7 +40,7 @@ const Navbar: React.FC<NavbarProps> = ({ session }) => {
         <Link href="/about">About</Link>
       </div>
       <div className={styles.navbarActions}>
-        {session ? (
+        {user ? (
           <button onClick={handleSignOut} className={styles.signoutButton}>
             Sign Out
           </button>

@@ -1,3 +1,5 @@
+//src\app\api\auth\signup\route.ts
+
 import { PrismaClient } from "@prisma/client";
 import bcrypt from "bcrypt";
 

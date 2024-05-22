@@ -1,15 +1,20 @@
 // src/app/auth/page.tsx
 
 "use client";
-
 import { useState } from "react";
 import { useForm } from "react-hook-form";
 import { z } from "zod";
 import { zodResolver } from "@hookform/resolvers/zod";
-import { signIn } from "next-auth/react";
 import { useRouter } from "next/navigation";
 import Image from "next/image";
 import styles from "./auth.module.css";
+import {
+  getAuth,
+  GoogleAuthProvider,
+  createUserWithEmailAndPassword,
+  signInWithEmailAndPassword,
+  signInWithPopup,
+} from "firebase/auth";
 
 const signupSchema = z
   .object({
@@ -32,6 +37,8 @@ type SignupSchema = z.infer<typeof signupSchema>;
 export default function AuthPage() {
   const [error, setError] = useState("");
   const router = useRouter();
+  const auth = getAuth();
+
   const {
     register: registerSignUp,
     handleSubmit: handleSubmitSignUp,
@@ -52,27 +59,15 @@ export default function AuthPage() {
   });
 
   const handleSignUp = async (data: SignupSchema) => {
-    const res = await fetch("/api/auth/signup", {
-      method: "POST",
-      headers: {
-        "Content-Type": "application/json",
-      },
-      body: JSON.stringify({
-        name: data.name,
-        email: data.email,
-        password: data.password,
-      }),
-    });
-
-    if (res.ok) {
-      await signIn("credentials", {
-        email: data.email,
-        password: data.password,
-      });
+    try {
+      const userCredential = await createUserWithEmailAndPassword(
+        auth,
+        data.email,
+        data.password
+      );
       router.push("/");
-    } else {
-      const errorData = await res.json();
-      setError(errorData.message);
+    } catch (error: any) {
+      setError(error.message);
     }
   };
 
@@ -83,16 +78,25 @@ export default function AuthPage() {
     email: string;
     password: string;
   }) => {
-    const res = await signIn("credentials", {
-      redirect: false,
-      email,
-      password,
-    });
-
-    if (res && res.error) {
-      setError(res.error);
-    } else {
+    try {
+      const userCredential = await signInWithEmailAndPassword(
+        auth,
+        email,
+        password
+      );
       router.push("/");
+    } catch (error: any) {
+      setError(error.message);
+    }
+  };
+
+  const handleGoogleSignIn = async () => {
+    const provider = new GoogleAuthProvider();
+    try {
+      const result = await signInWithPopup(auth, provider);
+      router.push("/");
+    } catch (error: any) {
+      setError(error.message);
     }
   };
 
@@ -143,7 +147,7 @@ export default function AuthPage() {
             <button
               type="button"
               className={styles.button}
-              onClick={() => signIn("google")}
+              onClick={handleGoogleSignIn}
             >
               Sign in with Google
             </button>

@@ -1,11 +1,19 @@
-import styles from "@/styles/otherPages.module.css";
+// src/app/gallery/page.tsx
+import dynamic from "next/dynamic";
+import React from "react";
 
-export default function GalleryPage() {
+const GalleryMosaic = dynamic(
+  () => import("@/components/GalleryMosaic/GalleryMosaic"),
+  { ssr: false }
+);
+
+const GalleryPage = () => {
   return (
-    <main>
-      <div className={styles.container}>
-        <h1>Gallery Page</h1>
-      </div>
-    </main>
+    <div>
+      <h1>Gallery</h1>
+      <GalleryMosaic />
+    </div>
   );
-}
+};
+
+export default GalleryPage;

@@ -53,3 +53,12 @@ model VerificationToken {
   expires    DateTime
   @@id([identifier, token])
 }
+
+model Image {
+  id         Int      @id @default(autoincrement())
+  src        String
+  alt        String
+  background String
+  createdAt  DateTime @default(now())
+  updatedAt  DateTime @updatedAt
+}
