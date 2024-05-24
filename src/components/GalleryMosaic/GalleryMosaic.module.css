@@ -1,34 +1,37 @@
+/* src\components\GalleryMosaic\GalleryMosaic.module.css */
 .myMasonryGrid {
   display: flex;
-  margin-left: -30px; /* Adjust this value according to your spacing */
+  margin-left: -30px; 
   width: auto;
 }
 
 .myMasonryGridColumn {
-  padding-left: 30px; /* gutter size */
+  padding-left: 30px; 
   background-clip: padding-box;
 }
 
 .imageWrapper {
-  margin-bottom: 30px; /* Adjust this value according to your spacing */
-  opacity: 0;
-  transform: translateY(20px);
-  animation: fadeIn 0.5s ease-out forwards;
-}
-
-@keyframes fadeIn {
-  to {
-    opacity: 1;
-    transform: translateY(0);
-  }
+  margin-bottom: 30px;
+  border-radius: 8px;
+  position: relative;
+  overflow: hidden;
+  transition: background-color 0.3s ease;
 }
 
 .image {
   border-radius: 8px;
-  transition: transform 0.3s ease-in-out;
-
+  transition: transform 0.3s ease-in-out, opacity 0.3s ease;
+  width: 100%;
+  height: 100%;
+  object-fit: cover;
+  display: block;
+  opacity: 0;
 }
 
 .image:hover {
   transform: scale(1.05);
+}
+
+.image[data-loaded="true"] {
+  opacity: 1;
 }

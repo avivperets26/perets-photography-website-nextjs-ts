@@ -1,0 +1,17 @@
+.GalleryPageContainer{
+    display: flex;
+    flex-direction: column;
+    justify-content: space-between;
+    
+    padding: 6rem;
+    min-height: 100vh;
+}
+
+.GalleryPageContainer h1{
+    display: flex;
+    width: 100%;
+    justify-content: center;
+    font-size: 2.5rem;
+    font-weight: 700;
+    margin-bottom: 2rem;
+}
